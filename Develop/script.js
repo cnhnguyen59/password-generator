@@ -1,18 +1,14 @@
-
 // Assignment Code
 var generateBtn = document.querySelector("#generate"); //selects the button
 
 // Write password to the #password input
 function writePassword() {
   var len = window.prompt("Enter length of password between 8 and 128 characters: ")
-  if (len === null) {
+  /* if (len === null) {
     return;
-  }
+  } */
   while (len <= 7 || len >= 129){
     var len = window.prompt("Invalid Entry. Enter length of password between 8 and 128 characters: ")
-    if (len === null) {
-      return;
-  }
   }
   var upper = window.prompt("Include uppercase letters? (Y/N): ").toLowerCase()
   while (upper != "y" && upper!= "n" ){
@@ -34,6 +30,11 @@ function writePassword() {
     var special = window.prompt("Invalid Entry. special characters? (Y/N): ") 
   }  
 
+  upper = (upper == 'y') ? true : false;
+  lower = (lower =='y') ? true : false;
+  num = (num == 'y') ? true : false;
+  special = (special == 'y') ? true : false;
+
   var password = generatePassword(len, upper, lower, num, special);
   var passwordText = document.querySelector("#password");
 
@@ -49,51 +50,38 @@ function generatePassword(len, upper, lower, num, special){
   var upperChar ='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
   var lowerChar = 'abcdefghijklmnopqrstuvwxyz'
   var numChar = '0123456789'
-  var specChar = ' !"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
+  var specChar = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
   var char = ''
 
-  console.log(upper)
-  console.log(lower)
-  console.log(num)
-  console.log(special)
-
-  if (upper == 'y'){
+  if (upper == true){
     char += upperChar
   }
-  if (lower == 'y') {
+  if (lower == true) {
     char += lowerChar
   }
-  if (num == 'y') {
+  if (num == true) {
     char += numChar
   }
-  if (special == 'y') {
+  if (special == true) {
     char += specChar
   }
-
-  console.log(char)
 
   for(let i = 0; i < len; i++) {
     password += char[Math.floor(Math.random() * char.length)]
   }
 
-  console.log(password)
-
   var hasUpper = /[A-Z]/.test(password)
   var hasLower = /[a-z]/.test(password)
   var hasNum = /[0-9]/.test(password)
-  var hasSpec = /[ !"#$%&\'()*+,-.\/:;<=>?@[\\\]^_`{|}~]/.test(password)
+  var hasSpec = /[!"#$%&\'()*+,-.\/:;<=>?@[\\\]^_`{|}~]/.test(password)
 
-  console.log(hasSpec)
-  console.log(hasUpper)
-  console.log(hasLower)
-  console.log(hasNum)
-
- if (hasUpper == false || hasLower == false || hasNum == false || hasSpec == false) {
+  if (hasUpper != upper || hasLower != lower || hasNum != num || hasSpec != special) {
     generatePassword(len, upper, lower, num, special)
   } else {
     console.log(password)
-    return password
+    return password;
   } 
+
 } 
 
 
