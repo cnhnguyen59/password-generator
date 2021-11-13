@@ -4,6 +4,6 @@ For this assignment, I created functions to ask for user input and created a pas
 
 Screenshots can be found in the assets folder
 
-Live URL Link:
+Live URL Link: https://cnhnguyen59.github.io/password-generator/
 
 
